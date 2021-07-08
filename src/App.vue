@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" width="25%">
-    <HelloWorld msg="Hello Vue in CodeSandbox!"/>
+    <Home />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
+import Home from "./components/Home";
 export default {
   name: "App",
   components: {
-    HelloWorld
-  }
+    Home,
+  },
 };
 </script>
 
@@ -24,5 +22,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+h2 {
+  color: #69B58A;
 }
 </style>
