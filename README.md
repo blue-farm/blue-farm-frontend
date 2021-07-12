@@ -28,6 +28,19 @@
 - 주문 목록, 업체 관리 화면 : 나윤
 - 주문서 생성, 수정 화면 : 현지
 
+## Vscode에서 사용방법
+```
+1. git clone한다
+2. vscode에서 폴더 열기를 한다
+3. vscode - terminal을 연다
+4. 연관 패키지 설치
+npm install
+5. 로컬 PC에 웹서버 띄우기
+npm run serve
+6. 결과물 확인
+http://localhost:8080
+```
+
 ## 참고 사이트
 
 https://kr.vuejs.org/v2/guide/  
