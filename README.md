@@ -33,10 +33,12 @@
 1. git clone한다
 2. vscode에서 폴더 열기를 한다
 3. vscode - terminal을 연다
+3-1. npm 설치 돼 있는지 확인(없으면 npm, node.js 설치 필요)
+https://butter-ring.tistory.com/17
 4. 연관 패키지 설치
-npm install
+$ npm install
 5. 로컬 PC에 웹서버 띄우기
-npm run serve
+$ npm run serve
 6. 결과물 확인
 http://localhost:8080
 ```
