@@ -1,12 +1,18 @@
 <template>
   <div id="app">
+    <List />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import List from "./components/List";
+
 export default {
   name: "App",
+  components: {
+    List,
+  },
 };
 </script>
 
@@ -19,8 +25,14 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+a {
+  color: #6326f5;
+  text-decoration: none;
+  font-size: large;
+  font-weight: bold;
+}
 
 h2 {
-  color: #69B58A;
+  color: #69b58a;
 }
 </style>
