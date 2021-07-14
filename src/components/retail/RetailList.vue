@@ -1,7 +1,7 @@
 <template>
   <div class="retail-list">
     <div class="title">
-      <div>미발송 : kg</div>
+      <div>미발송 : {{ notShippedAmount }} kg</div>
     </div>
     <div class="list-1">
       <div>미발송</div>
@@ -16,13 +16,24 @@
       <div>간략주소</div>
       <div>입금여부</div>
     </div>
-    <div class="list-2"></div>
+    <div class="list-2" v-for="item in list" v-bind:key="item.id">
+      <div>{{ item.date }}</div>
+      <div>{{ item.name }}</div>
+      <div>{{ item.amount }}</div>
+      <div>{{ item.address }}</div>
+      <div>{{ item.payment }}</div>
+    </div>
   </div>
 </template>
 
 <script>
+import data from "../tmpdata/RetailList.json";
+
 export default {
   name: "RetailList",
+  data: function () {
+    return data;
+  },
 };
 </script>
 
