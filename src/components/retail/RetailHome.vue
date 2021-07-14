@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>RetailHome</h2>
+    <h2>소매</h2>
     <router-view></router-view>
   </div>
 </template>

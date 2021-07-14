@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>WholesaleHome</h2>
+    <h2>도매</h2>
     <router-view></router-view>
   </div>
 </template>
