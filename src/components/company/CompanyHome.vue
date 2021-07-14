@@ -1,12 +1,15 @@
 <template>
   <div>
-    <h2>CompanyHome</h2>
+    <h2>도매 업체 관리</h2>
+    <CompanyList />
   </div>
 </template>
 
 <script>
+import CompanyList from "./CompanyList";
 export default {
   name: "CompanyHome",
+  components: { CompanyList },
 };
 </script>
 
