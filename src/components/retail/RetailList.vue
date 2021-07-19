@@ -14,20 +14,20 @@
         <div>입금</div>
         <div>미입금</div>
       </div>
-      <div class="list-2">
-        <div>주문일자</div>
-        <div>주문자</div>
-        <div>kg</div>
-        <div>간략주소</div>
-        <div>입금여부</div>
-      </div>
-      <div class="list-2" v-for="item in data.list" v-bind:key="item.id">
-        <div>{{ item.date }}</div>
-        <div>{{ item.name }}</div>
-        <div>{{ item.amount }}</div>
-        <div>{{ item.address }}</div>
-        <div>{{ item.payment }}</div>
-      </div>
+      <b-table
+        hover
+        responsive="sm"
+        :fields="fields"
+        :items="data.list"
+        head-variant="light"
+      >
+        <template #cell(payment)="data">
+          {{ data.item.payment ? "⭕" : "❌" }}
+        </template>
+        <template #cell(shipped)="data">
+          {{ data.item.shipped ? "⭕" : "❌" }}
+        </template>
+      </b-table>
     </div>
   </div>
 </template>
@@ -39,7 +39,19 @@ import { getRetailList } from "./getRetailList";
 export default {
   name: "RetailList",
   data: function () {
-    return { data: null, isloading: false, error: null };
+    return {
+      isloading: false,
+      error: null,
+      data: null,
+      fields: [
+        { key: "date", label: "주문일", sortable: true },
+        { key: "name", label: "주문자", sortable: true },
+        { key: "amount", label: "kg", sortable: true },
+        { key: "address", label: "간략주소", sortable: true },
+        { key: "payment", label: "입금여부", sortable: true },
+        { key: "shipped", label: "발송여부", sortable: true },
+      ],
+    };
   },
   created() {
     this.getData();
