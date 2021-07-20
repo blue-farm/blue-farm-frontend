@@ -1,42 +1,36 @@
 <template>
   <div id="list">
     <div id="route-list_button">
-      <button @click="onVisible">📜</button>
+      <b-button variant="info" @click="onVisible">📜</b-button>
     </div>
-    <div id="route-list" ref="routeList">
-      <button @click="onVisible">닫기❌</button>
+    <b-nav vertical id="route-list" ref="routeList">
+      <b-button variant="warning" @click="onVisible">닫기❌</b-button>
 
       <h3>소매</h3>
-      <router-link to="/retail/list" @click.native="onVisible"
-        >주문 목록</router-link
-      >
-      <router-link to="/retail/order" exact @click.native="onVisible"
-        >주문서 작성</router-link
+      <b-nav-item to="/retail/list" @click="onVisible">주문 목록</b-nav-item>
+      <b-nav-item to="/retail/order" exact @click="onVisible"
+        >주문서 작성</b-nav-item
       >
 
       <h3>도매</h3>
-      <router-link to="/wholesale/list" @click.native="onVisible"
-        >주문 목록</router-link
+      <b-nav-item to="/wholesale/list" @click="onVisible">주문 목록</b-nav-item>
+      <b-nav-item to="/wholesale/order" exact @click="onVisible"
+        >주문서 작성</b-nav-item
       >
-      <router-link to="/wholesale/order" exact @click.native="onVisible"
-        >주문서 작성</router-link
-      >
-      <router-link to="/company" exact @click.native="onVisible"
-        >도매 업체 관리</router-link
+      <b-nav-item to="/company" exact @click="onVisible"
+        >도매 업체 관리</b-nav-item
       >
 
       <br />
       <div>테스트용</div>
-      <router-link to="/" exact @click.native="onVisible"
-        >홈으로 돌아가기💨</router-link
+      <b-nav-item to="/" exact @click="onVisible">홈으로 돌아가기💨</b-nav-item>
+      <b-nav-item to="/retail/edit/1" exact @click="onVisible"
+        >소매 주문서 수정</b-nav-item
       >
-      <router-link to="/retail/edit/1" exact @click.native="onVisible"
-        >소매 주문서 수정</router-link
+      <b-nav-item to="/wholesale/edit/1" exact @click="onVisible"
+        >도매 주문서 수정</b-nav-item
       >
-      <router-link to="/wholesale/edit/1" exact @click.native="onVisible"
-        >도매 주문서 수정</router-link
-      >
-    </div>
+    </b-nav>
   </div>
 </template>
 
@@ -44,7 +38,7 @@
 export default {
   name: "List",
   methods: {
-    onVisible: function() {
+    onVisible() {
       this.$refs.routeList.classList.toggle("visible");
     },
   },

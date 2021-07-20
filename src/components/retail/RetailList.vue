@@ -14,20 +14,32 @@
         <div>입금</div>
         <div>미입금</div>
       </div>
-      <div class="list-2">
-        <div>주문일자</div>
-        <div>주문자</div>
-        <div>kg</div>
-        <div>간략주소</div>
-        <div>입금여부</div>
-      </div>
-      <div class="list-2" v-for="item in data.list" v-bind:key="item.id">
-        <div>{{ item.date }}</div>
-        <div>{{ item.name }}</div>
-        <div>{{ item.amount }}</div>
-        <div>{{ item.address }}</div>
-        <div>{{ item.payment }}</div>
-      </div>
+      <b-container fluid>
+        <b-table
+          hover
+          responsive
+          :fields="fields"
+          :items="data.list"
+          head-variant="light"
+          small
+        >
+          <template #table-colgroup="scope">
+            <col
+              v-for="field in scope.fields"
+              :key="field.key"
+              :style="{
+                width: field.key === 'address' ? '200px' : '120px',
+              }"
+            />
+          </template>
+          <template #cell(payment)="data">
+            {{ data.item.payment ? "⭕" : "❌" }}
+          </template>
+          <template #cell(shipped)="data">
+            {{ data.item.shipped ? "⭕" : "❌" }}
+          </template>
+        </b-table>
+      </b-container>
     </div>
   </div>
 </template>
@@ -39,7 +51,48 @@ import { getRetailList } from "./getRetailList";
 export default {
   name: "RetailList",
   data: function () {
-    return { data: null, isloading: false, error: null };
+    return {
+      isloading: false,
+      error: null,
+      data: null,
+      fields: [
+        {
+          key: "name",
+          label: "주문자",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+        {
+          key: "amount",
+          label: "kg",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+        {
+          key: "address",
+          label: "간략 주소",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+        {
+          key: "payment",
+          label: "입금 여부",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+        {
+          key: "shipped",
+          label: "발송 여부",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+      ],
+    };
   },
   created() {
     this.getData();
@@ -81,9 +134,5 @@ export default {
 }
 .list-1 > div {
   margin-left: 1rem;
-}
-.list-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 </style>
