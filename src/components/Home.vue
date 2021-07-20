@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <h2>블루농원 관리 페이지 입니다🙋‍♀️</h2>
+  <div id="hello">
+    <div class="h1 font-weight-bold m-0">블루농원 관리 페이지 입니다🙋‍♀️</div>
   </div>
 </template>
 
@@ -12,4 +12,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#hello {
+  margin-top: 60px;
+}
 </style>

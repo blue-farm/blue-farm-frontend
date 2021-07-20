@@ -14,20 +14,32 @@
         <div>입금</div>
         <div>미입금</div>
       </div>
-      <b-table
-        hover
-        responsive="sm"
-        :fields="fields"
-        :items="data.list"
-        head-variant="light"
-      >
-        <template #cell(payment)="data">
-          {{ data.item.payment ? "⭕" : "❌" }}
-        </template>
-        <template #cell(shipped)="data">
-          {{ data.item.shipped ? "⭕" : "❌" }}
-        </template>
-      </b-table>
+      <b-container fluid>
+        <b-table
+          hover
+          responsive
+          :fields="fields"
+          :items="data.list"
+          head-variant="light"
+          small
+        >
+          <template #table-colgroup="scope">
+            <col
+              v-for="field in scope.fields"
+              :key="field.key"
+              :style="{
+                width: field.key === 'address' ? '200px' : '120px',
+              }"
+            />
+          </template>
+          <template #cell(payment)="data">
+            {{ data.item.payment ? "⭕" : "❌" }}
+          </template>
+          <template #cell(shipped)="data">
+            {{ data.item.shipped ? "⭕" : "❌" }}
+          </template>
+        </b-table>
+      </b-container>
     </div>
   </div>
 </template>
@@ -44,12 +56,41 @@ export default {
       error: null,
       data: null,
       fields: [
-        { key: "date", label: "주문일", sortable: true },
-        { key: "name", label: "주문자", sortable: true },
-        { key: "amount", label: "kg", sortable: true },
-        { key: "address", label: "간략주소", sortable: true },
-        { key: "payment", label: "입금여부", sortable: true },
-        { key: "shipped", label: "발송여부", sortable: true },
+        {
+          key: "name",
+          label: "주문자",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+        {
+          key: "amount",
+          label: "kg",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+        {
+          key: "address",
+          label: "간략 주소",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+        {
+          key: "payment",
+          label: "입금 여부",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+        {
+          key: "shipped",
+          label: "발송 여부",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
       ],
     };
   },
@@ -93,9 +134,5 @@ export default {
 }
 .list-1 > div {
   margin-left: 1rem;
-}
-.list-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 </style>
