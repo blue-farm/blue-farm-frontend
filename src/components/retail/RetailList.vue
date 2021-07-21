@@ -28,7 +28,10 @@
               v-for="field in scope.fields"
               :key="field.key"
               :style="{
-                width: field.key === 'address' ? '200px' : '120px',
+                width:
+                  field.key === 'payment' || field.key === 'shipped'
+                    ? '120px'
+                    : '200px',
               }"
             />
           </template>
@@ -57,6 +60,13 @@ export default {
       data: null,
       fields: [
         {
+          key: "date",
+          label: "주문일",
+          sortable: true,
+          thClass: "align-middle",
+          tdClass: "align-middle",
+        },
+        {
           key: "name",
           label: "주문자",
           sortable: true,
@@ -70,13 +80,7 @@ export default {
           thClass: "align-middle",
           tdClass: "align-middle",
         },
-        {
-          key: "address",
-          label: "간략 주소",
-          sortable: true,
-          thClass: "align-middle",
-          tdClass: "align-middle",
-        },
+
         {
           key: "payment",
           label: "입금 여부",
