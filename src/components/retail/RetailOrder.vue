@@ -10,9 +10,14 @@
         <input type="text" v-model="name" placeholder="박현지" />
       </div>
       <div>
+        <label for="name"> 주문량 : </label>
+        <input type="text" v-model="amount" placeholder="1" size="3" />
+        <label> kg </label>
+      </div>
+      <div>
         <label>수령 방식 : </label>
         <input type="radio" value="express" v-model="serve" />
-        <label for="express"> 택배 </label>
+        <label for="express"> 택배 </label> &nbsp;
         <input type="radio" value="direct" v-model="serve" />
         <label for="direct"> 직접 배송 </label>
       </div>
@@ -26,14 +31,18 @@
       </div>
       <div>
         <label for="phone"> 휴대폰 번호: </label>
-        <input type="text" v-model="phone" placeholder="010-000-0000" />
+        <input
+          type="text"
+          v-model="phone"
+          placeholder="-를 뺀 숫자만 입력하세요"
+        />
       </div>
     </div>
     <div>
       <p v-if="errorShow">{{ errors }}</p>
     </div>
     <div class="button-list">
-      <button @click="fetchData">완료</button>
+      <button @click="fetchData">완료</button> &nbsp;
       <button @click="resetData">초기화</button>
     </div>
   </div>
@@ -46,6 +55,7 @@ export default {
     return {
       date: this.getToday(),
       name: "",
+      amount: "",
       serve: "express",
       address: "",
       phone: "",
@@ -58,6 +68,9 @@ export default {
       this.errors = [];
       if (!this.name) {
         this.errors.push("이름을 입력하세요.");
+      }
+      if (!this.amount) {
+        this.errors.push("주문량을 입력하세요.");
       }
       if (this.serve == "express") {
         if (!this.address) {
@@ -76,6 +89,8 @@ export default {
             this.date +
             " name :" +
             this.name +
+            " amount :" +
+            this.amount +
             " serve :" +
             this.serve +
             " address :" +
@@ -92,6 +107,7 @@ export default {
     resetData: function () {
       this.date = this.getToday();
       this.name = "";
+      this.amount = "";
       this.serve = "express";
       this.address = "";
       this.phone = "";
