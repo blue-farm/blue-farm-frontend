@@ -7,40 +7,49 @@
       <b-button variant="warning" @click="onVisible">닫기❌</b-button>
 
       <h3>소매</h3>
-      <b-nav-item to="/retail/list" @click="onVisible">주문 목록</b-nav-item>
-      <b-nav-item to="/retail/order" exact @click="onVisible"
-        >주문서 작성</b-nav-item
+      <b-nav-item
+        v-for="item in data_retail"
+        :key="item.path"
+        :to="item.path"
+        @click="onVisible"
+      >
+        {{ item.name }}</b-nav-item
       >
 
       <h3>도매</h3>
-      <b-nav-item to="/wholesale/list" @click="onVisible">주문 목록</b-nav-item>
-      <b-nav-item to="/wholesale/order" exact @click="onVisible"
-        >주문서 작성</b-nav-item
-      >
-      <b-nav-item to="/company" exact @click="onVisible"
-        >도매 업체 관리</b-nav-item
+      <b-nav-item
+        v-for="item in data_wholesale"
+        :key="item.path"
+        :to="item.path"
+        @click="onVisible"
+        >{{ item.name }}</b-nav-item
       >
 
       <br />
       <div>테스트용</div>
-      <b-nav-item to="/" exact @click="onVisible">홈으로 돌아가기💨</b-nav-item>
-      <b-nav-item to="/retail/edit/1" exact @click="onVisible"
-        >소매 주문서 수정</b-nav-item
-      >
-      <b-nav-item to="/wholesale/edit/1" exact @click="onVisible"
-        >도매 주문서 수정</b-nav-item
+      <b-nav-item
+        v-for="item in data_test"
+        :key="item.path"
+        :to="item.path"
+        @click="onVisible"
+        >{{ item.name }}</b-nav-item
       >
     </b-nav>
   </div>
 </template>
 
 <script>
+import { data_retail, data_wholesale, data_test } from "./listData.js";
+
 export default {
   name: "List",
   methods: {
     onVisible() {
       this.$refs.routeList.classList.toggle("visible");
     },
+  },
+  data: () => {
+    return { data_retail, data_wholesale, data_test };
   },
 };
 </script>
@@ -67,5 +76,9 @@ export default {
   position: fixed;
   left: 1rem;
   top: 1rem;
+}
+
+.nav-link {
+  color: #6326f5;
 }
 </style>

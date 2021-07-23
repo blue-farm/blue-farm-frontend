@@ -1,5 +1,5 @@
 {
-  "name": "vue",
+  "name": "blue-farm-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -50,5 +50,5 @@
     "vuejs",
     "starter"
   ],
-  "description": "Vue.js example starter project"
+  "description": "blue farm project - frontend"
 }

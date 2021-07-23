@@ -19,7 +19,7 @@ import NotFound from "../components/404.vue";
 
 Vue.use(VueRouter);
 
-const router = new VueRouter({
+export const opt = {
   routes: [
     { path: "/", component: Home },
     {
@@ -46,7 +46,9 @@ const router = new VueRouter({
     },
     { path: "*", component: NotFound },
   ],
-});
+};
+
+const router = new VueRouter(opt);
 
 export default router;
 
