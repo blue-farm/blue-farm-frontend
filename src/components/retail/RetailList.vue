@@ -8,12 +8,6 @@
       <div class="title">
         <div>미발송 : {{ data.notShippedAmount }} kg</div>
       </div>
-      <div class="list-1">
-        <div>미발송</div>
-        <div>발송</div>
-        <div>입금</div>
-        <div>미입금</div>
-      </div>
       <b-container fluid>
         <b-table
           hover
@@ -38,9 +32,6 @@
           <template #cell(payment)="data">
             {{ data.item.payment ? "⭕" : "❌" }}
           </template>
-          <template #cell(shipped)="data">
-            {{ data.item.shipped ? "⭕" : "❌" }}
-          </template>
         </b-table>
       </b-container>
     </div>
@@ -53,7 +44,7 @@ import { getRetailList } from "./getRetailList";
 
 export default {
   name: "RetailList",
-  data: function () {
+  data: function() {
     return {
       isloading: false,
       error: null,
@@ -88,13 +79,6 @@ export default {
           thClass: "align-middle",
           tdClass: "align-middle",
         },
-        {
-          key: "shipped",
-          label: "발송 여부",
-          sortable: true,
-          thClass: "align-middle",
-          tdClass: "align-middle",
-        },
       ],
     };
   },
@@ -118,7 +102,6 @@ export default {
           this.error = err.toString();
         } else {
           this.data = post;
-          //console.log(this.data);
         }
       });
     },
