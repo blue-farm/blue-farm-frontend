@@ -14,3 +14,40 @@ export function getRetailList(route, callback) {
     }
   }, 500);
 }
+
+export const retailListData = {
+  isloading: false,
+  error: null,
+  data: null,
+  fields: [
+    {
+      key: "date",
+      label: "주문일",
+      sortable: true,
+      thClass: "align-middle",
+      tdClass: "align-middle",
+    },
+    {
+      key: "name",
+      label: "주문자",
+      sortable: true,
+      thClass: "align-middle",
+      tdClass: "align-middle",
+    },
+    {
+      key: "amount",
+      label: "kg",
+      sortable: true,
+      thClass: "align-middle",
+      tdClass: "align-middle",
+    },
+
+    {
+      key: "payment",
+      label: "입금 여부",
+      sortable: true,
+      thClass: "align-middle",
+      tdClass: "align-middle",
+    },
+  ],
+};
