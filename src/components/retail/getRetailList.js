@@ -1,14 +1,18 @@
 import data from "../tmpdata/RetailList.json";
 
-export function getRetailList(route, callback) {
+export function getRetailList(path, isShipped, callback) {
   // fake an API request
   setTimeout(() => {
-    //console.log(route);
+    //console.log(path);
     if (data.list.length > 0) {
       const { list, ...others } = data;
-      const unshipped_list = list.filter((item) => item.shipped === false);
-      const unshipped_data = { list: [...unshipped_list], ...others };
-      callback(null, unshipped_data);
+      const filter_list = list.filter((item) => item.shipped === isShipped);
+      const filter_data = {
+        list: [...filter_list],
+        isShipped: isShipped,
+        ...others
+      };
+      callback(null, filter_data);
     } else {
       callback(new Error("데이터가 없어요😅"));
     }
@@ -25,21 +29,21 @@ export const retailListData = {
       label: "주문일",
       sortable: true,
       thClass: "align-middle",
-      tdClass: "align-middle",
+      tdClass: "align-middle"
     },
     {
       key: "name",
       label: "주문자",
       sortable: true,
       thClass: "align-middle",
-      tdClass: "align-middle",
+      tdClass: "align-middle"
     },
     {
       key: "amount",
       label: "kg",
       sortable: true,
       thClass: "align-middle",
-      tdClass: "align-middle",
+      tdClass: "align-middle"
     },
 
     {
@@ -47,7 +51,7 @@ export const retailListData = {
       label: "입금 여부",
       sortable: true,
       thClass: "align-middle",
-      tdClass: "align-middle",
-    },
-  ],
+      tdClass: "align-middle"
+    }
+  ]
 };

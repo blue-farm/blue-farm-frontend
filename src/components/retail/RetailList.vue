@@ -5,9 +5,10 @@
       {{ error }}
     </div>
     <div id="retail-list" v-if="data !== null">
-      <div class="title">
-        <div>미발송 : {{ data.notShippedAmount }} kg</div>
+      <div class="title" v-if="data.isShipped === false">
+        미발송 : {{ data.notShippedAmount }} kg
       </div>
+      <div class="title" v-else>발송 : {{ data.notShippedAmount }} kg</div>
       <b-container fluid>
         <b-table
           hover
@@ -22,10 +23,7 @@
               v-for="field in scope.fields"
               :key="field.key"
               :style="{
-                width:
-                  field.key === 'payment' || field.key === 'shipped'
-                    ? '120px'
-                    : '200px',
+                width: field.key === 'payment' ? '120px' : '200px',
               }"
             />
           </template>
@@ -44,7 +42,7 @@ import { getRetailList, retailListData } from "./getRetailList";
 
 export default {
   name: "RetailList",
-  data: function() {
+  data: function () {
     return {
       ...retailListData,
     };
@@ -62,8 +60,9 @@ export default {
     getData() {
       this.error = this.data = null;
       this.isloading = true;
+      const isShipped = this.$route.path === "/retail/list" ? false : true;
 
-      getRetailList(this.$route, (err, post) => {
+      getRetailList(this.$route.path, isShipped, (err, post) => {
         this.isloading = false;
         if (err) {
           this.error = err.toString();

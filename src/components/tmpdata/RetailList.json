@@ -52,7 +52,7 @@
       "phone": "010-1234-5678",
       "address": "캘리포니아 화창시",
       "payment": false,
-      "shipped": false,
+      "shipped": true,
       "delivery": "express"
     },
     {
@@ -85,7 +85,7 @@
       "phone": "010-1234-5678",
       "address": "캘리포니아 화창시",
       "payment": false,
-      "shipped": false,
+      "shipped": true,
       "delivery": "express"
     },
     {
@@ -139,8 +139,8 @@
       "amount": 10,
       "phone": "010-1234-5678",
       "address": "경기도 화성시",
-      "payment": true,
-      "shipped": false,
+      "payment": false,
+      "shipped": true,
       "delivery": "express"
     },
     {
