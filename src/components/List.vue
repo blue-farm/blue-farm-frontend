@@ -4,12 +4,12 @@
       >📜</b-button
     >
     <b-sidebar id="sidebar" shadow>
-      <b-nav vertical id="route-list" ref="routeList">
+      <b-nav vertical class="ml-3" id="route-list" ref="routeList">
         <h3>소매</h3>
         <b-nav-item
           v-for="item in data_retail"
           :key="item.path"
-          :to="{ path: `${item.path}` }"
+          :to="item.path"
         >
           {{ item.name }}</b-nav-item
         >

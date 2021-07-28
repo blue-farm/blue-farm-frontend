@@ -5,10 +5,15 @@
       {{ error }}
     </div>
     <div id="retail-list" v-if="data !== null">
-      <div class="title" v-if="data.isShipped === false">
+      <div
+        class="title text-right font-weight-bold mr-3"
+        v-if="data.isShipped === false"
+      >
         미발송 : {{ data.notShippedAmount }} kg
       </div>
-      <div class="title" v-else>발송 : {{ data.notShippedAmount }} kg</div>
+      <div class="title text-right font-weight-bold mr-3" v-else>
+        발송 : {{ data.notShippedAmount }} kg
+      </div>
       <b-container fluid>
         <b-table
           hover
@@ -76,16 +81,4 @@ export default {
 </script>
 
 <style scoped>
-.title,
-.list-1 {
-  display: flex;
-  justify-content: center;
-}
-.list-1 {
-  justify-content: flex-end;
-  margin-right: 4rem;
-}
-.list-1 > div {
-  margin-left: 1rem;
-}
 </style>
