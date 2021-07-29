@@ -30,6 +30,7 @@
 - 주문서 생성, 수정 화면 : 현지
 
 ## Vscode에서 사용방법
+
 ```
 1. git clone한다
 2. vscode에서 폴더 열기를 한다
@@ -49,3 +50,4 @@ http://localhost:8080
 https://kr.vuejs.org/v2/guide/  
 https://router.vuejs.org/kr/installation.html  
 https://jeonghwan-kim.github.io/2018/04/07/vue-router.html
+https://velog.io/@skyepodium/vue-router%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EB%8B%AC%ED%95%98%EA%B8%B0-eskrsmr3

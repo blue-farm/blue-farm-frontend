@@ -29,7 +29,12 @@ export const opt = {
         { path: "list", component: RetailList },
         { path: "shippedlist", component: RetailList },
         { path: "order", component: RetailOrder },
-        { path: "edit/:id", component: RetailEdit }
+        {
+          path: "edit/:id",
+          component: RetailEdit,
+          name: "RetailEdit",
+          props: true
+        }
       ]
     },
     {

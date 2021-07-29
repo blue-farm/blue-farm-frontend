@@ -20,8 +20,9 @@
           responsive
           :fields="fields"
           :items="data.list"
-          head-variant="light"
           small
+          thead-class="pink-bg"
+          @row-clicked="(item) => getEditPage(item)"
         >
           <template #table-colgroup="scope">
             <col
@@ -76,9 +77,20 @@ export default {
         }
       });
     },
+    // 이렇게 하면 뒤로 가기 -> 다시 앞으로 가기 버튼 눌렀을 때 데이터가 사라짐ㅠㅠ
+    // 서버에서 다시 데이터를 갖고 오는게 맞을듯
+    getEditPage(data) {
+      this.$router.push({
+        name: "RetailEdit",
+        params: { id: data.id },
+      });
+    },
   },
 };
 </script>
 
-<style scoped>
+<style>
+.pink-bg {
+  background-color: #faddde;
+}
 </style>
