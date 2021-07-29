@@ -27,9 +27,10 @@ export const opt = {
       component: RetailHome,
       children: [
         { path: "list", component: RetailList },
+        { path: "shippedlist", component: RetailList },
         { path: "order", component: RetailOrder },
-        { path: "edit/:id", component: RetailEdit },
-      ],
+        { path: "edit/:id", component: RetailEdit }
+      ]
     },
     {
       path: "/wholesale",
@@ -37,15 +38,15 @@ export const opt = {
       children: [
         { path: "list", component: WholesaleList },
         { path: "order", component: WholesaleOrder },
-        { path: "edit/:id", component: WholesaleEdit },
-      ],
+        { path: "edit/:id", component: WholesaleEdit }
+      ]
     },
     {
       path: "/company",
-      component: CompanyHome,
+      component: CompanyHome
     },
-    { path: "*", component: NotFound },
-  ],
+    { path: "*", component: NotFound }
+  ]
 };
 
 const router = new VueRouter(opt);

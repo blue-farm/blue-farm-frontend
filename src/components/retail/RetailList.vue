@@ -5,8 +5,14 @@
       {{ error }}
     </div>
     <div id="retail-list" v-if="data !== null">
-      <div class="title">
-        <div>미발송 : {{ data.notShippedAmount }} kg</div>
+      <div
+        class="title text-right font-weight-bold mr-3"
+        v-if="data.isShipped === false"
+      >
+        미발송 : {{ data.notShippedAmount }} kg
+      </div>
+      <div class="title text-right font-weight-bold mr-3" v-else>
+        발송 : {{ data.notShippedAmount }} kg
       </div>
       <b-container fluid>
         <b-table
@@ -22,10 +28,7 @@
               v-for="field in scope.fields"
               :key="field.key"
               :style="{
-                width:
-                  field.key === 'payment' || field.key === 'shipped'
-                    ? '120px'
-                    : '200px',
+                width: field.key === 'payment' ? '120px' : '200px',
               }"
             />
           </template>
@@ -44,7 +47,7 @@ import { getRetailList, retailListData } from "./getRetailList";
 
 export default {
   name: "RetailList",
-  data: function() {
+  data: function () {
     return {
       ...retailListData,
     };
@@ -62,8 +65,9 @@ export default {
     getData() {
       this.error = this.data = null;
       this.isloading = true;
+      const isShipped = this.$route.path === "/retail/list" ? false : true;
 
-      getRetailList(this.$route, (err, post) => {
+      getRetailList(this.$route.path, isShipped, (err, post) => {
         this.isloading = false;
         if (err) {
           this.error = err.toString();
@@ -77,16 +81,4 @@ export default {
 </script>
 
 <style scoped>
-.title,
-.list-1 {
-  display: flex;
-  justify-content: center;
-}
-.list-1 {
-  justify-content: flex-end;
-  margin-right: 4rem;
-}
-.list-1 > div {
-  margin-left: 1rem;
-}
 </style>

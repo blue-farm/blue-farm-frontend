@@ -11,7 +11,8 @@
 / : Home
 
 /retail : 소매 타이틀
-/retail/list : 소매 주문 목록
+/retail/list : 소매 미발송 목록
+/retail/shippedlist : 소매 발송 목록
 /retail/order : 소매 주문서 생성
 /retail/edit/1 : 소매 주문서 수정
 
