@@ -1,6 +1,6 @@
 <template>
   <div id="list">
-    <b-button id="listbox" class="m-1" v-b-toggle.sidebar variant="info"
+    <b-button id="listbox" class="m-2" v-b-toggle.sidebar variant="info"
       >📜</b-button
     >
     <b-sidebar id="sidebar" shadow>

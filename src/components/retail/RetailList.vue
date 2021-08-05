@@ -5,6 +5,7 @@
       {{ error }}
     </div>
     <div id="retail-list" v-if="data !== null">
+      <!-- 분기 처리 해뒀는데 바꿔야 할까낭 -->
       <div
         class="title text-right font-weight-bold mr-3"
         v-if="data.isShipped === false"
@@ -12,8 +13,9 @@
         미발송 : {{ data.notShippedAmount }} kg
       </div>
       <div class="title text-right font-weight-bold mr-3" v-else>
-        발송 : {{ data.notShippedAmount }} kg
+        발송 : {{ data.shippedAmount }} kg
       </div>
+      <!--  -->
       <b-container fluid>
         <b-table
           hover
@@ -23,6 +25,8 @@
           small
           thead-class="pink-bg"
           @row-clicked="(item) => getEditPage(item)"
+          :per-page="perPage"
+          :current-page="currentPage"
         >
           <template #table-colgroup="scope">
             <col
@@ -38,6 +42,14 @@
           </template>
         </b-table>
       </b-container>
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        pills
+        align="center"
+        class="text-success"
+      ></b-pagination>
     </div>
   </div>
 </template>
@@ -51,6 +63,8 @@ export default {
   data: function () {
     return {
       ...retailListData,
+      perPage: 15,
+      currentPage: 1,
     };
   },
   created() {
@@ -61,6 +75,13 @@ export default {
   },
   components: {
     loading: Loading,
+  },
+  computed: {
+    rows() {
+      return this.data.isShipped
+        ? this.data.shippedAmount
+        : this.data.notShippedAmount;
+    },
   },
   methods: {
     getData() {
@@ -77,8 +98,7 @@ export default {
         }
       });
     },
-    // 이렇게 하면 뒤로 가기 -> 다시 앞으로 가기 버튼 눌렀을 때 데이터가 사라짐ㅠㅠ
-    // 서버에서 다시 데이터를 갖고 오는게 맞을듯
+
     getEditPage(data) {
       this.$router.push({
         name: "RetailEdit",
@@ -92,5 +112,20 @@ export default {
 <style>
 .pink-bg {
   background-color: #faddde;
+}
+
+.page-item.active .page-link {
+  background-color: cadetblue;
+  border-color: cadetblue;
+}
+.page-link {
+  color: cadetblue;
+}
+.table th,
+.table td {
+  border-top: 1px solid #faddde;
+}
+.table thead th {
+  border-bottom: none;
 }
 </style>

@@ -1,16 +1,16 @@
 import data from "../tmpdata/RetailList.json";
+import shipData from "../tmpdata/RetailShipTrueList.json";
+import notShipdata from "../tmpdata/RetailShipFalseList.json";
 
 export function getRetailList(path, isShipped, callback) {
   // fake an API request
   setTimeout(() => {
     //console.log(path);
     if (data.list.length > 0) {
-      const { list, ...others } = data;
-      const filter_list = list.filter((item) => item.shipped === isShipped);
+      const shipCheckData = isShipped ? shipData : notShipdata;
       const filter_data = {
-        list: [...filter_list],
         isShipped: isShipped,
-        ...others
+        ...shipCheckData
       };
       callback(null, filter_data);
     } else {

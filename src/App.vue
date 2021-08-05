@@ -33,6 +33,6 @@ a {
 }
 
 h2 {
-  color: #69b58a;
+  color: cadetblue;
 }
 </style>
