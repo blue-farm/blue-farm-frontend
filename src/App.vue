@@ -7,6 +7,11 @@
 
 <script>
 import List from "./components/List";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://35.223.247.96";
+axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
 export default {
   name: "App",
