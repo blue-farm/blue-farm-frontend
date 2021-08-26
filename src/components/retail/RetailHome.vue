@@ -9,13 +9,6 @@
 <script>
 import axios from "axios";
 
-let config = {
-  headers: {
-    "Content-Type": "application/json;charset=utf-8",
-    "Access-Control-Allow-Origin": "*",
-  },
-};
-
 export default {
   name: "RetailHome",
   data() {
@@ -23,10 +16,21 @@ export default {
       info: null,
     };
   },
-  mounted() {
-    axios
-      .get("http://35.223.247.96/retail/getAll", config)
-      .then((res) => (this.info = res));
+  created() {
+    this.fetchData();
+  },
+  watch: {
+    $route: "fetchData",
+  },
+  methods: {
+    fetchData() {
+      axios
+        .get("/retail/getAll")
+        .then((res) => (this.info = res.data.data))
+        .catch((error) => {
+          console.log("proxy request error", error);
+        });
+    },
   },
 };
 </script>
