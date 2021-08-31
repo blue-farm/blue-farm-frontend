@@ -33,12 +33,12 @@
               v-for="field in scope.fields"
               :key="field.key"
               :style="{
-                width: field.key === 'payment' ? '120px' : '200px',
+                width: field.key === 'isPaid' ? '120px' : '200px',
               }"
             />
           </template>
-          <template #cell(payment)="data">
-            {{ data.item.payment ? "⭕" : "❌" }}
+          <template #cell(isPaid)="data">
+            {{ data.item.isPaid ? "⭕" : "❌" }}
           </template>
         </b-table>
       </b-container>
@@ -60,7 +60,7 @@ import { getRetailList, retailListData } from "./getRetailList";
 
 export default {
   name: "RetailList",
-  data: function () {
+  data: function() {
     return {
       ...retailListData,
       perPage: 15,
@@ -90,12 +90,12 @@ export default {
       const isShipped = this.$route.path === "/retail/list" ? false : true;
 
       getRetailList(this.$route.path, isShipped, (err, post) => {
-        this.isloading = false;
         if (err) {
           this.error = err.toString();
         } else {
           this.data = post;
         }
+        this.isloading = false;
       });
     },
 
