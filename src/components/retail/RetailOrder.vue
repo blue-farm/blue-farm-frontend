@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "RetailOrder",
   data() {
@@ -150,6 +151,26 @@ export default {
             " phone :" +
             this.phone
         );
+        axios
+          .post("/retail", {
+            date: this.year + "-" + this.month + "-" + this.day,
+            name: this.name,
+            amount: this.amount,
+            phone: this.phone,
+            addr1: this.address,
+            addr2: this.address2,
+            zip: this.zip,
+            isPaid: 0,
+            isShipped: 0,
+            delivery: this.serve,
+          })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+            console.log("error occured");
+          });
         alert("정상적으로 추가되었습니다.");
         this.resetData();
       } else {
