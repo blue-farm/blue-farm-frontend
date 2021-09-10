@@ -30,12 +30,12 @@
         <input type="text" v-model="zip" size="5" />
       </div>
       <div>
-        <label for="addr1"> 주소 : </label>
-        <input type="text" v-model="addr1" size="25"/>
+        <label for="address"> 주소 : </label>
+        <input type="text" v-model="address" size="25"/>
       </div>
       <div v-if="serve == 'express'">
-        <label for="addr2"> 상세주소: </label>
-        <input type="text" for="addr2"/>
+        <label for="address2"> 상세주소: </label>
+        <input type="text" v-model="address2"/>
       </div>
       <div>
         <label for="phone"> 휴대폰 번호: </label>
@@ -73,8 +73,8 @@ export default {
       date: null,
       amount: null,
       phone: null,
-      addr1: null,
-      addr2: null,
+      address: null,
+      address2: null,
       zip: null,
       isPaid: null,
       isShipped: null,
@@ -107,8 +107,8 @@ export default {
           this.date = post.list.date;
           this.amount = post.list.amount;
           this.phone = post.list.phone;
-          this.addr1 = post.list.addr1;
-          this.addr2 = post.list.addr2;
+          this.address = post.list.address;
+          this.address2 = post.list.address2;
           this.zip = post.list.zip;
           this.isPaid = post.list.isPaid;
           this.isShipped = post.list.isShipped;
@@ -124,8 +124,8 @@ export default {
             name: this.name,
             amount: this.amount,
             phone: this.phone,
-            addr1: this.address,
-            addr2: this.address2,
+            address: this.address,
+            address2: this.address2,
             zip: this.zip,
             isPaid: this.isPaid,
             isShipped: this.isShipped,
@@ -147,8 +147,8 @@ export default {
             name: this.name,
             amount: this.amount,
             phone: this.phone,
-            addr1: this.address,
-            addr2: this.address2,
+            address: this.address,
+            address2: this.address2,
             zip: this.zip,
             isPaid: this.isPaid,
             isShipped: 1,
