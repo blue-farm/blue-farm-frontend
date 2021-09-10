@@ -34,24 +34,15 @@
       </div>
       <div>
         <label for="address"> 주소 : </label>
-        <input
-          type="text"
-          v-model="address"
-          size="25"
-          placeholder="경기도 화성시 동탄순환대로"
-        />
+        <input type="text" v-model="address" size="25" placeholder="경기도 화성시 동탄순환대로"/>
       </div>
       <div v-if="serve == 'express'">
         <label for="address2"> 상세주소: </label>
-        <input type="text" for="address2" placeholder="101동 101호" />
+        <input type="text" v-model="address2" placeholder="101동 101호" />
       </div>
       <div>
         <label for="phone"> 휴대폰 번호: </label>
-        <input
-          type="text"
-          v-model="phone"
-          placeholder="-를 뺀 숫자만 입력하세요"
-        />
+        <input type="text" v-model="phone" placeholder="-를 뺀 숫자만 입력하세요" />
       </div>
     </div>
     <div>
@@ -119,7 +110,7 @@ export default {
         this.errors.push("주문량을 입력하세요.");
       }
       if (this.serve == "express") {
-        if (!this.zip || !this.addres || !this.address2) {
+        if (!this.zip || !this.address || !this.address2) {
           this.errors.push("택배의 경우 우편번호/주소 입력이 필요합니다.");
         }
         if (!this.phone) {
