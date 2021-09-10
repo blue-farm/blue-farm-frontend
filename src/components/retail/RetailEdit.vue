@@ -172,7 +172,7 @@ export default {
   },
   removeData: function(){
     if(confirm("해당 주문 건을 정말로 삭제하시겠습니까?")){ 
-      axios.put('/retail/'+this.id);
+      axios.delete('/retail/'+this.id);
       alert("삭제되었습니다");
     }
   }
