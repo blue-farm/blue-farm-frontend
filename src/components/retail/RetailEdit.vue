@@ -114,8 +114,8 @@ export default {
           this.date = post.list.date;
           this.amount = post.list.amount;
           this.phone = post.list.phone;
-          this.address = post.list.address;
-          this.address2 = post.list.address2;
+          this.address = post.list.addr;
+          this.address2 = post.list.addr2;
           this.zip = post.list.zip;
           this.isPaid = post.list.isPaid;
           this.isShipped = post.list.isShipped;
@@ -131,8 +131,8 @@ export default {
             name: this.name,
             amount: this.amount,
             phone: this.phone,
-            address: this.address,
-            address2: this.address2,
+            addr: this.address,
+            addr2: this.address2,
             zip: this.zip,
             isPaid: this.isPaid,
             isShipped: this.isShipped,
@@ -154,8 +154,8 @@ export default {
             name: this.name,
             amount: this.amount,
             phone: this.phone,
-            address: this.address,
-            address2: this.address2,
+            addr: this.address,
+            addr2: this.address2,
             zip: this.zip,
             isPaid: this.isPaid,
             isShipped: 1,
