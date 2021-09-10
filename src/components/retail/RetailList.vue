@@ -10,10 +10,10 @@
         class="title text-right font-weight-bold mr-3"
         v-if="data.isShipped === false"
       >
-        미발송 : {{ data.notShippedAmount }} kg
+        미발송 : {{ data.total }} kg
       </div>
       <div class="title text-right font-weight-bold mr-3" v-else>
-        발송 : {{ data.shippedAmount }} kg
+        발송 : {{ data.total }} kg
       </div>
       <!--  -->
       <b-container fluid>
@@ -60,7 +60,7 @@ import { getRetailList, retailListData } from "./getRetailList";
 
 export default {
   name: "RetailList",
-  data: function() {
+  data: function () {
     return {
       ...retailListData,
       perPage: 15,
@@ -78,9 +78,7 @@ export default {
   },
   computed: {
     rows() {
-      return this.data.isShipped
-        ? this.data.shippedAmount
-        : this.data.notShippedAmount;
+      return this.data.total;
     },
   },
   methods: {

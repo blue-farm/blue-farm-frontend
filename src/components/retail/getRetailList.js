@@ -2,10 +2,13 @@ import axios from "axios";
 
 export function getRetailList(path, isShipped, callback) {
   axios
-    .get("/retail/getAll")
+    .get("/retail?sort=date&page=0")
     .then((res) => {
       if (res.data !== null) {
-        callback(null, { list: res.data.data, isShipped: isShipped });
+        let data = { list: res.data.data.orders, isShipped: isShipped }
+        data = isShipped ? { ...data, total: res.data.data.shippedAmount } :
+          { ...data, total: res.data.data.unShippedAmount };
+        callback(null, data)
       } else {
         callback(new Error("데이터가 없어요😅"));
       }
@@ -56,7 +59,7 @@ export const retailListData = {
 export function getRetailItem(path, callback) {
   const id = parseInt(path.replace("/retail/edit/", ""), 10);
   axios
-    .get(`/retail/get/${id}`)
+    .get(`/retail/${id}`)
     .then((res) => {
       if (res.data !== null) {
         callback(null, { list: res.data.data });
