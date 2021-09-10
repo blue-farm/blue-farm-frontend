@@ -5,6 +5,7 @@
       <!--<div v-for="(value, name) in data.list" :key="value">
         {{ name }} : {{ value }}
       </div>-->
+      <button @click="updateShippedState">발송 완료 처리</button> &nbsp;
       <div>
         <label> 주문일 : </label>
         {{date}}
@@ -44,14 +45,20 @@
       <div>
         <label for="isPaid"> 입금 여부:</label>
         <input type="radio" value="0" v-model="isPaid" />
-        <label for="1"> 미입금 </label>
+        <label for="0"> 미입금 </label>
         <input type="radio" value="1" v-model="isPaid" />
-        <label for="0"> 입금 완료</label>
+        <label for="1"> 입금 완료</label>
+      </div>
+      <div>
+        <label for="isShipped"> 발송 여부:</label>
+        <input type="radio" value="0" v-model="isShipped" />
+        <label for="0"> 미발송 </label>
+        <input type="radio" value="1" v-model="isShipped" />
+        <label for="1"> 발송 완료</label>
       </div>
       <div class="button-list">
-        <button @click="updateShippedState">배송 완료</button> &nbsp;
         <button @click="updateData"> 수정 완료 </button> &nbsp;
-        <button @click="closeWindow"> 닫기 </button>
+        <button @click="removeData"> 삭제 </button>
     </div>
     </div>
   </div>
@@ -161,10 +168,13 @@ export default {
             console.log(error);
             console.log("error occured");
           });
-          alert("배송완료 처리되었습니다.");
+          alert("발송 완료 처리되었습니다.");
   },
-  closeWindow: function(){
-    alert("닫기 버튼 처리하기~.~");
+  removeData: function(){
+    if(confirm("해당 주문 건을 정말로 삭제하시겠습니까?")){ 
+      axios.put('/retail/'+this.id);
+      alert("삭제되었습니다");
+    }
   }
   },
 };
