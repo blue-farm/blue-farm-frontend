@@ -72,7 +72,7 @@ export default {
       phone: "",
       errors: [],
       errorShow: false,
-      zip: "",
+      zip: 0,
       address2: "",
     };
   },
@@ -143,7 +143,7 @@ export default {
             this.phone
         );
         axios
-          .post("/retail", {
+          .post("/retail/", {
             date: this.year + "-" + this.month + "-" + this.day,
             name: this.name,
             amount: this.amount,
@@ -176,7 +176,7 @@ export default {
       this.name = "";
       this.amount = "";
       this.serve = "express";
-      this.zip = "";
+      this.zip = 0;
       this.address = "";
       this.address2 = "";
       this.phone = "";
