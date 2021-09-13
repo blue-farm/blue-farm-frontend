@@ -51,6 +51,10 @@ export default {
   color: #6326f5;
 }
 
+a.router-link-exact-active {
+  background-color: #ceeee8;
+}
+
 #list {
   text-align: left;
 }

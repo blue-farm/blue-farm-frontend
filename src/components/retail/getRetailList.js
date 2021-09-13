@@ -1,14 +1,20 @@
 import axios from "axios";
 
-export function getRetailList(path, isShipped, callback) {
+export function getRetailList(path, callback) {
+  const isShipped = path.search("/retail/list") ? true : false;
   axios
     .get("/retail?sort=date&page=0")
     .then((res) => {
       if (res.data !== null) {
-        let data = { list: res.data.data.orders, isShipped: isShipped }
-        data = isShipped ? { ...data, total: res.data.data.shippedAmount } :
-          { ...data, total: res.data.data.unShippedAmount };
-        callback(null, data)
+        let data = { list: res.data.data.orders, isShipped: isShipped };
+        data = isShipped
+          ? { ...data, total: res.data.data.shippedAmount, totalText: "발송" }
+          : {
+              ...data,
+              total: res.data.data.unShippedAmount,
+              totalText: "미발송",
+            };
+        callback(null, data);
       } else {
         callback(new Error("데이터가 없어요😅"));
       }

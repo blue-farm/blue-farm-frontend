@@ -5,17 +5,9 @@
       {{ error }}
     </div>
     <div id="retail-list" v-if="data !== null">
-      <!-- 분기 처리 해뒀는데 바꿔야 할까낭 -->
-      <div
-        class="title text-right font-weight-bold mr-3"
-        v-if="data.isShipped === false"
-      >
-        미발송 : {{ data.total }} kg
+      <div class="title text-right font-weight-bold mr-3">
+        {{ `${data.totalText} : ${data.total} kg` }}
       </div>
-      <div class="title text-right font-weight-bold mr-3" v-else>
-        발송 : {{ data.total }} kg
-      </div>
-      <!--  -->
       <b-container fluid>
         <b-table
           hover
@@ -60,10 +52,10 @@ import { getRetailList, retailListData } from "./getRetailList";
 
 export default {
   name: "RetailList",
-  data: function () {
+  data: function() {
     return {
       ...retailListData,
-      perPage: 15,
+      perPage: 10,
       currentPage: 1,
     };
   },
@@ -85,9 +77,8 @@ export default {
     getData() {
       this.error = this.data = null;
       this.isloading = true;
-      const isShipped = this.$route.path === "/retail/list" ? false : true;
 
-      getRetailList(this.$route.path, isShipped, (err, post) => {
+      getRetailList(this.$route.path, (err, post) => {
         if (err) {
           this.error = err.toString();
         } else {
