@@ -1,24 +1,22 @@
 <template>
   <div>
-    <loading v-if="isloading" />
+    <loading v-if="isLoading" />
     <div v-if="error" class="error">
       {{ error }}
     </div>
-    <div id="retail-list" v-if="data !== null">
+    <div id="retail-list" v-if="!isLoading">
       <div class="title text-right font-weight-bold mr-3">
-        {{ `${data.totalText} : ${data.total} kg` }}
+        {{ isShippedPage }}
       </div>
       <b-container fluid>
         <b-table
           hover
           responsive
           :fields="fields"
-          :items="data.list"
+          :items="retail.list"
           small
           thead-class="pink-bg"
           @row-clicked="(item) => getEditPage(item)"
-          :per-page="perPage"
-          :current-page="currentPage"
         >
           <template #table-colgroup="scope">
             <col
@@ -29,19 +27,20 @@
               }"
             />
           </template>
-          <template #cell(isPaid)="data">
-            {{ data.item.isPaid ? "⭕" : "❌" }}
+          <template #cell(isPaid)="retail">
+            {{ retail.item.isPaid ? "⭕" : "❌" }}
           </template>
         </b-table>
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          @page-click="pageClick"
+          pills
+          align="center"
+          class="text-success"
+        ></b-pagination>
       </b-container>
-      <b-pagination
-        v-model="currentPage"
-        :total-rows="rows"
-        :per-page="perPage"
-        pills
-        align="center"
-        class="text-success"
-      ></b-pagination>
     </div>
   </div>
 </template>
@@ -55,36 +54,46 @@ export default {
   data: function() {
     return {
       ...retailListData,
-      perPage: 10,
+      perPage: 20,
       currentPage: 1,
     };
   },
   created() {
-    this.getData();
+    this.startPage();
   },
   watch: {
-    $route: "getData",
+    $route: "startPage",
   },
   components: {
     loading: Loading,
   },
   computed: {
+    // 수정 필요
     rows() {
-      return this.data.total;
+      return Math.max(this.retail.unShippedAmount, this.retail.shippedAmount);
+    },
+    isShippedPage() {
+      return this.$route.path.search("/retail/list")
+        ? `발송 : ${this.retail.shippedAmount} kg`
+        : `미발송 : ${this.retail.unShippedAmount} kg`;
     },
   },
   methods: {
-    getData() {
-      this.error = this.data = null;
-      this.isloading = true;
+    startPage(pageNum) {
+      this.isLoading = true;
 
-      getRetailList(this.$route.path, (err, post) => {
+      if (pageNum == undefined || isNaN(pageNum)) {
+        pageNum = 1;
+      }
+
+      getRetailList(this.$route.path, pageNum, (err, post) => {
         if (err) {
           this.error = err.toString();
         } else {
-          this.data = post;
+          this.retail = post;
+          this.currentPage = pageNum;
         }
-        this.isloading = false;
+        this.isLoading = false;
       });
     },
 
@@ -93,6 +102,10 @@ export default {
         name: "RetailEdit",
         params: { id: data.id },
       });
+    },
+
+    pageClick(bvEvent, pageNum) {
+      this.startPage(pageNum);
     },
   },
 };
