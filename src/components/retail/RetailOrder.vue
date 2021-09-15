@@ -34,7 +34,12 @@
       </div>
       <div>
         <label for="address"> 주소 : </label>
-        <input type="text" v-model="address" size="25" placeholder="경기도 화성시 동탄순환대로"/>
+        <input
+          type="text"
+          v-model="address"
+          size="25"
+          placeholder="경기도 화성시 동탄순환대로"
+        />
       </div>
       <div v-if="serve == 'express'">
         <label for="address2"> 상세주소: </label>
@@ -42,7 +47,11 @@
       </div>
       <div>
         <label for="phone"> 휴대폰 번호: </label>
-        <input type="text" v-model="phone" placeholder="-를 뺀 숫자만 입력하세요" />
+        <input
+          type="text"
+          v-model="phone"
+          placeholder="-를 뺀 숫자만 입력하세요"
+        />
       </div>
     </div>
     <div>
@@ -57,6 +66,8 @@
 
 <script>
 import axios from "axios";
+
+const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
 export default {
   name: "RetailOrder",
   data() {
@@ -77,7 +88,7 @@ export default {
     };
   },
   methods: {
-    showApi: function () {
+    showApi: function() {
       new window.daum.Postcode({
         oncomplete: (data) => {
           let fullRoadAddr = data.roadAddress;
@@ -101,7 +112,7 @@ export default {
         },
       }).embed(this.$refs.embed); //.open();
     },
-    validationCheck: function () {
+    validationCheck: function() {
       this.errors = [];
       if (!this.name) {
         this.errors.push("이름을 입력하세요.");
@@ -118,7 +129,7 @@ export default {
         }
       }
     },
-    fetchData: function () {
+    fetchData: function() {
       this.validationCheck();
       if (this.errors.length == 0) {
         console.log(
@@ -143,7 +154,7 @@ export default {
             this.phone
         );
         axios
-          .post("/retail/", {
+          .post(`${PROXY}/retail/`, {
             date: this.year + "-" + this.month + "-" + this.day,
             name: this.name,
             amount: this.amount,
@@ -158,7 +169,7 @@ export default {
           .then((res) => {
             console.log(res.data);
           })
-          .catch(function (error) {
+          .catch(function(error) {
             console.log(error);
             console.log("error occured");
           });
@@ -168,7 +179,7 @@ export default {
         this.errorShow = true;
       }
     },
-    resetData: function () {
+    resetData: function() {
       //this.date = this.getToday();
       this.year = this.getCurrentYear();
       this.month = this.getCurrentMonth();
@@ -183,15 +194,15 @@ export default {
       this.errors = [];
       this.errorShow = false;
     },
-    getCurrentMonth: function () {
+    getCurrentMonth: function() {
       const today = new Date();
       return today.getMonth() + 1;
     },
-    getCurrentYear: function () {
+    getCurrentYear: function() {
       const today = new Date();
       return today.getFullYear();
     },
-    getCurrentDay: function () {
+    getCurrentDay: function() {
       const today = new Date();
       return today.getDate();
     },
@@ -199,5 +210,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

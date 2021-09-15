@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+
 export function getRetailList(path, pageNum, callback) {
   axios
-    .get(`/retail?sort=date&page=${pageNum - 1}`)
+    .get(`${PROXY}/retail?sort=date&page=${pageNum - 1}`)
     .then((res) => {
       if (res.data !== null) {
         let retail = {
@@ -61,7 +63,7 @@ export const retailListData = {
 export function getRetailItem(path, callback) {
   const id = parseInt(path.replace("/retail/edit/", ""), 10);
   axios
-    .get(`/retail/${id}`)
+    .get(`${PROXY}/retail/${id}`)
     .then((res) => {
       if (res.data !== null) {
         callback(null, { list: res.data.data });

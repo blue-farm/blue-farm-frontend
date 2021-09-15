@@ -8,15 +8,15 @@
       <button @click="updateShippedState">발송 완료 처리</button> &nbsp;
       <div>
         <label> 주문일 : </label>
-        {{date}}
+        {{ date }}
       </div>
-       <div>
+      <div>
         <label> 주문자 :</label>
         <input type="text" v-model="name" />
-       </div>
+      </div>
       <div>
         <label> 주문량 : </label>
-        <input type="text" v-model="amount"/>
+        <input type="text" v-model="amount" />
         <label> kg</label>
       </div>
       <div>
@@ -32,15 +32,19 @@
       </div>
       <div>
         <label for="address"> 주소 : </label>
-        <input type="text" v-model="address" size="25"/>
+        <input type="text" v-model="address" size="25" />
       </div>
       <div v-if="serve == 'express'">
         <label for="address2"> 상세주소: </label>
-        <input type="text" v-model="address2"/>
+        <input type="text" v-model="address2" />
       </div>
       <div>
         <label for="phone"> 휴대폰 번호: </label>
-        <input type="text" v-model="phone" placeholder="-를 뺀 숫자만 입력하세요"/>
+        <input
+          type="text"
+          v-model="phone"
+          placeholder="-를 뺀 숫자만 입력하세요"
+        />
       </div>
       <div>
         <label for="isPaid"> 입금 여부:</label>
@@ -57,9 +61,9 @@
         <label for="1"> 발송 완료</label>
       </div>
       <div class="button-list">
-        <button @click="updateData"> 수정 완료 </button> &nbsp;
-        <button @click="removeData"> 삭제 </button>
-    </div>
+        <button @click="updateData">수정 완료</button> &nbsp;
+        <button @click="removeData">삭제</button>
+      </div>
     </div>
   </div>
 </template>
@@ -69,6 +73,7 @@ import { getRetailItem } from "./getRetailList";
 import Loading from "../Loading.vue";
 import axios from "axios";
 
+const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
 export default {
   name: "RetailEdit",
   data: function() {
@@ -86,7 +91,7 @@ export default {
       isPaid: null,
       isShipped: null,
       delivery: null,
-      serve:null,
+      serve: null,
     };
   },
   created() {
@@ -124,58 +129,60 @@ export default {
         this.isloading = false;
       });
     },
-  updateData: function() {
-      axios.put('/retail/'+this.id, {
-            id: this.id,
-            date: this.date,
-            name: this.name,
-            amount: this.amount,
-            phone: this.phone,
-            addr1: this.address,
-            addr2: this.address2,
-            zip: this.zip,
-            isPaid: this.isPaid,
-            isShipped: this.isShipped,
-            delivery: this.serve,
-          })
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-            console.log("error occured");
-          });
-        alert("정상적으로 수정되었습니다."+this.amount);
-  },
-  updateShippedState: function(){
-      axios.put('/retail/'+this.id, {
-            id: this.id,
-            date: this.date,
-            name: this.name,
-            amount: this.amount,
-            phone: this.phone,
-            addr1: this.address,
-            addr2: this.address2,
-            zip: this.zip,
-            isPaid: this.isPaid,
-            isShipped: 1,
-            delivery: this.serve,
-          })
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-            console.log("error occured");
-          });
-          alert("발송 완료 처리되었습니다.");
-  },
-  removeData: function(){
-    if(confirm("해당 주문 건을 정말로 삭제하시겠습니까?")){ 
-      axios.delete('/retail/'+this.id);
-      alert("삭제되었습니다");
-    }
-  }
+    updateData: function() {
+      axios
+        .put(`${PROXY}/retail/` + this.id, {
+          id: this.id,
+          date: this.date,
+          name: this.name,
+          amount: this.amount,
+          phone: this.phone,
+          addr1: this.address,
+          addr2: this.address2,
+          zip: this.zip,
+          isPaid: this.isPaid,
+          isShipped: this.isShipped,
+          delivery: this.serve,
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch(function(error) {
+          console.log(error);
+          console.log("error occured");
+        });
+      alert("정상적으로 수정되었습니다." + this.amount);
+    },
+    updateShippedState: function() {
+      axios
+        .put(`${PROXY}/retail/` + this.id, {
+          id: this.id,
+          date: this.date,
+          name: this.name,
+          amount: this.amount,
+          phone: this.phone,
+          addr1: this.address,
+          addr2: this.address2,
+          zip: this.zip,
+          isPaid: this.isPaid,
+          isShipped: 1,
+          delivery: this.serve,
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch(function(error) {
+          console.log(error);
+          console.log("error occured");
+        });
+      alert("발송 완료 처리되었습니다.");
+    },
+    removeData: function() {
+      if (confirm("해당 주문 건을 정말로 삭제하시겠습니까?")) {
+        axios.delete(`${PROXY}/retail/` + this.id);
+        alert("삭제되었습니다");
+      }
+    },
   },
 };
 </script>

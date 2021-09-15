@@ -51,3 +51,5 @@ https://kr.vuejs.org/v2/guide/
 https://router.vuejs.org/kr/installation.html  
 https://jeonghwan-kim.github.io/2018/04/07/vue-router.html
 https://velog.io/@skyepodium/vue-router%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EB%8B%AC%ED%95%98%EA%B8%B0-eskrsmr3
+https://blog.jim-nielsen.com/2020/a-cors-proxy-with-netlify/
+https://velog.io/@mochapoke/TIL-netlify%EB%A1%9C-%EB%B0%B0%ED%8F%AC%EC%8B%9C-proxy-%EC%85%8B%ED%8C%85%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95
